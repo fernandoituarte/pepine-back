@@ -1,6 +1,7 @@
 import express from 'express';
 
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import userDocImplementation from './services/swagger.js';
 
 import router from './routers/index.router.js';
@@ -8,7 +9,7 @@ import router from './routers/index.router.js';
 const app = express();
 
 app.use(cors());
-
+app.use(cookieParser());
 app.use(express.json());
 
 app.use(express.urlencoded({

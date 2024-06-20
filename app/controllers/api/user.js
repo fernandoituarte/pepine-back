@@ -125,9 +125,15 @@ class UserController extends CoreController {
        */
     const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '23h' });
     if (token) {
+      response.cookie('authToken', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'Strict',
+      });
+
       response.status(200).json({
         status: 'success',
-        data: { token },
+        message: 'Token generated successfully',
       });
     } else {
       throw new InternalServerError();
