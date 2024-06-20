@@ -128,7 +128,7 @@ class UserController extends CoreController {
       response.cookie('authToken', token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
-        sameSite: 'Strict',
+        sameSite: 'lax',
       });
 
       response.status(200).json({
