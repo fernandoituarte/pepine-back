@@ -5,7 +5,16 @@ import pkg from 'pg';
 const debug = Debug('pepine:database');
 
 const { Pool } = pkg;
-const pool = new Pool();
+const pool = new Pool({
+  host: process.env.PGHOST,
+  port: process.env.PGPORT,
+  user: process.env.PGUSER,
+  password: process.env.PGPASSWORD,
+  database: process.env.PGDATABASE,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
 // Use the connection pool to connect to the database.
 pool.connect().then(() => {
   debug('database client connected');
