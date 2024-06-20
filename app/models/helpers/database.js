@@ -11,9 +11,7 @@ const pool = new Pool({
   user: process.env.PGUSER,
   password: process.env.PGPASSWORD,
   database: process.env.PGDATABASE,
-  ssl: {
-    rejectUnauthorized: false,
-  },
+  ssl: true,
 });
 // Use the connection pool to connect to the database.
 pool.connect().then(() => {
