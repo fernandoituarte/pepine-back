@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "jest tests",
+    "start": "node index.js",
     "dev": "cross-env DEBUG=pepine:* npx nodemon index.js",
     "resetdb": "sqitch revert -y && sqitch deploy"
   },
