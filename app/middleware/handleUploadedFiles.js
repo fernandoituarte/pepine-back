@@ -17,7 +17,7 @@ async function handleUploadedFiles(request, ___, next) {
         .jpeg({ quality: 80 })
         .toBuffer();
 
-        // Get file name without extension
+      // Get file name without extension
       const fileNameWithoutExtension = path.parse(file.originalname).name;
       // Generating a unique file name
       const uniqueFileName = `${fileNameWithoutExtension}_${Date.now()}${path.extname(file.originalname)}`;
@@ -30,7 +30,7 @@ async function handleUploadedFiles(request, ___, next) {
       const fileName = path.basename(filePath);
       // Returning image details
       return {
-        url: `https://pepine-back-ae81.onrender.com/static/media/${fileName}`,
+        url: `https://pepine.onrender.com/static/media/${fileName}`,
         name: uniqueFileName,
       };
     }));

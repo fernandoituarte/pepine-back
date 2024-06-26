@@ -105,6 +105,7 @@ class UserController extends CoreController {
    */
   login = async (request, response) => {
     debug(`${this.constructor.name} login`);
+
     // Check if user exists
     const user = await this.constructor.dataMapper.findUserByEmail(request.body.email);
     if (!user) {
@@ -127,8 +128,16 @@ class UserController extends CoreController {
     if (token) {
       response.cookie('authToken', token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'lax',
+        secure: true,
+        sameSite: 'Strict',
+        maxAge: 24 * 60 * 60 * 1000,
+      });
+
+      const userJson = JSON.stringify({ id: user.id, role: user.role });
+      response.cookie('user', userJson, {
+        maxAge: 24 * 60 * 60 * 1000,
+        secure: true,
+        sameSite: 'Lax',
       });
 
       response.status(200).json({

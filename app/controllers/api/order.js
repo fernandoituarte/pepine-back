@@ -75,6 +75,7 @@ class OrderController extends CoreController {
   getOneOrder = async (request, response) => {
     debug(`${this.constructor.name} getOneOrder`);
     const { id } = request.params;
+
     const result = await this.constructor.dataMapper.findOrderByPk(id);
     // Check if the user asking for the orders is the same as the user in the request
     if (request.user.role !== 'admin' && String(request.user.id) !== String(result.user_id)) {

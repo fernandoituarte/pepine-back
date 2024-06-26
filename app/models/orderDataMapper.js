@@ -1,8 +1,8 @@
-import Debug from 'debug';
-import client from './helpers/database.js';
-import CoreDataMapper from './CoreDataMapper.js';
+import Debug from "debug";
+import client from "./helpers/database.js";
+import CoreDataMapper from "./CoreDataMapper.js";
 
-const debug = Debug('pepine:DataMapper:order');
+const debug = Debug("pepine:DataMapper:order");
 
 // Create a order data mapper
 /**
@@ -10,14 +10,14 @@ const debug = Debug('pepine:DataMapper:order');
  * @extends CoreDataMapper
  */
 class OrderDataMapper extends CoreDataMapper {
-  static tableName = 'order';
+  static tableName = "order";
 
   // insertfunction created in postgresql
-  static insertFunc = 'create_order';
+  static insertFunc = "create_order";
 
-  static updateFunc = 'update_order_status';
+  static updateFunc = "update_order_status";
 
-  static viewname = 'getAllOrders';
+  static viewname = "getAllOrders";
 
   /**
    * Fetch all orders from the database.
@@ -28,8 +28,7 @@ class OrderDataMapper extends CoreDataMapper {
     debug(`${this.constructor.name} findAllOrders`);
     const dataSource = this.constructor.viewname;
     const preparedQuery = {
-      text:
-        `
+      text: `
         SELECT * FROM ${dataSource}
         ORDER BY id
         `,
@@ -48,8 +47,7 @@ class OrderDataMapper extends CoreDataMapper {
     debug(`${this.constructor.name} findOrderByPk(${orderId})`);
     const dataSource = this.constructor.viewname;
     const preparedQuery = {
-      text:
-        `
+      text: `
         SELECT * FROM ${dataSource}
         WHERE id=$1
         `,
@@ -82,7 +80,7 @@ class OrderDataMapper extends CoreDataMapper {
       values: [orderId, newStatus],
     };
     const result = await client.query(query);
-    return result.rows[0];
+    return { result: result.rows[0], status: newStatus };
   };
 }
 
