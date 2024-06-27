@@ -129,7 +129,7 @@ class UserController extends CoreController {
       response.cookie('authToken', token, {
         httpOnly: true,
         secure: true,
-        sameSite: 'Strict',
+        sameSite: 'Lax',
         maxAge: 24 * 60 * 60 * 1000,
       });
 
