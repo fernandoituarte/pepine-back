@@ -9,7 +9,7 @@ import router from './routers/index.router.js';
 const app = express();
 
 const corsOptions = {
-  origin: 'https://pepineapp.vercel.app',
+  origin: 'pepineapp.vercel.app',
   credentials: true,
 };
 
