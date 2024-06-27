@@ -105,7 +105,6 @@ class UserController extends CoreController {
    */
   login = async (request, response) => {
     debug(`${this.constructor.name} login`);
-
     // Check if user exists
     const user = await this.constructor.dataMapper.findUserByEmail(request.body.email);
     if (!user) {
@@ -126,23 +125,9 @@ class UserController extends CoreController {
        */
     const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '23h' });
     if (token) {
-      response.cookie('authToken', token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'Lax',
-        maxAge: 24 * 60 * 60 * 1000,
-      });
-
-      const userJson = JSON.stringify({ id: user.id, role: user.role });
-      response.cookie('user', userJson, {
-        maxAge: 24 * 60 * 60 * 1000,
-        secure: true,
-        sameSite: 'Lax',
-      });
-
       response.status(200).json({
         status: 'success',
-        message: 'Token generated successfully',
+        data: { token },
       });
     } else {
       throw new InternalServerError();
