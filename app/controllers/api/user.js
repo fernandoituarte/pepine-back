@@ -106,6 +106,7 @@ class UserController extends CoreController {
   login = async (request, response) => {
     debug(`${this.constructor.name} login`);
     // Check if user exists
+
     const user = await this.constructor.dataMapper.findUserByEmail(request.body.email);
     if (!user) {
       throw new NoRessourceFoundError();
