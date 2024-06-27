@@ -9,7 +9,7 @@ import router from './routers/index.router.js';
 const app = express();
 
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: 'https://pepineapp.vercel.app',
   credentials: true,
 };
 
