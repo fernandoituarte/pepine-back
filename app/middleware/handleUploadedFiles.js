@@ -30,7 +30,7 @@ async function handleUploadedFiles(request, ___, next) {
       const fileName = path.basename(filePath);
       // Returning image details
       return {
-        url: `https://pepine.onrender.com/static/media/${fileName}`,
+        url: `http://localhost:3001/static/media/${fileName}`,
         name: uniqueFileName,
       };
     }));

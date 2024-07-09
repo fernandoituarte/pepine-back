@@ -9,7 +9,12 @@ import router from './routers/index.router.js';
 const app = express();
 
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://pepine.vercel.app'],
+  origin: [
+    'http://localhost:3000',
+    'http://localhost:3001',
+    'https://pepine.vercel.app',
+    'https://pepine.onrender.com',
+  ],
   credentials: true,
 };
 
@@ -17,9 +22,11 @@ app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(express.json());
 
-app.use(express.urlencoded({
-  extended: true,
-}));
+app.use(
+  express.urlencoded({
+    extended: true,
+  }),
+);
 
 app.use('/static', express.static('public'));
 

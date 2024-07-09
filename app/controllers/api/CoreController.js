@@ -20,7 +20,6 @@ class CoreController {
    * @returns {Promise<void>} - Promise that resolves when the response is sent
    */
   getAll = async (_, response) => {
-    console.log(_);
     debug(`${this.constructor.name} getAll`);
     const results = await this.constructor.dataMapper.findAll();
     // Check if the result is not null
